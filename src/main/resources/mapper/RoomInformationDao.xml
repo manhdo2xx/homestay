@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.homestay.dao.RoomInformationDao">
+    <resultMap type="com.homestay.entity.RoomInformationEntity" id="roominformationMap">
+        <result property="roomNumber" column="roomnumber"/>
+        <result property="roomPicture" column="roompicture"/>
+        <result property="availableDate" column="availabledate"/>
+        <result property="roomType" column="roomtype"/>
+        <result property="floor" column="floor"/>
+        <result property="price" column="price"/>
+        <result property="roomFacilities" column="roomfacilities"/>
+        <result property="roomDetails" column="roomdetails"/>
+        <result property="roomStatus" column="roomstatus"/>
+        <result property="storeupnum" column="storeupnum"/>
+        <result property="clicktime" column="clicktime"/>
+        <result property="clicknum" column="clicknum"/>
+    </resultMap>
+
+    <select id="selectListView"
+            resultType="com.homestay.entity.view.RoomInformationView" >
+
+        SELECT  roominformation.* FROM roominformation  roominformation
+        <where> 1=1 ${ew.sqlSegment}</where>
+    </select>
+
+    <select id="selectView"
+            resultType="com.homestay.entity.view.RoomInformationView" >
+        SELECT * FROM roominformation  roominformation <where> 1=1 ${ew.sqlSegment}</where>
+    </select>
+
+
+    <select id="selectValue" resultType="map" >
+        SELECT ${params.xColumn}, ROUND(sum(${params.yColumn}),1) total FROM roominformation
+        <where> 1=1 ${ew.sqlSegment}</where>
+        group by ${params.xColumn}
+        limit 10
+    </select>
+
+    <select id="selectTimeStatValue" resultType="map" >
+        <if test = 'params.timeStatType == "日"'>
+            SELECT DATE_FORMAT(${params.xColumn},'%Y-%m-%d') ${params.xColumn}, sum(${params.yColumn}) total FROM roominformation
+            <where> 1=1 ${ew.sqlSegment}</where>
+            group by DATE_FORMAT(${params.xColumn},'%Y-%m-%d')
+        </if>
+        <if test = 'params.timeStatType == "月"'>
+            SELECT DATE_FORMAT(${params.xColumn},'%Y-%m') ${params.xColumn}, sum(${params.yColumn}) total FROM roominformation
+            <where> 1=1 ${ew.sqlSegment}</where>
+            group by DATE_FORMAT(${params.xColumn},'%Y-%m')
+        </if>
+        <if test = 'params.timeStatType == "年"'>
+            SELECT DATE_FORMAT(${params.xColumn},'%Y') ${params.xColumn}, sum(${params.yColumn}) total FROM roominformation
+            <where> 1=1 ${ew.sqlSegment}</where>
+            group by DATE_FORMAT(${params.xColumn},'%Y')
+        </if>
+    </select>
+
+    <select id="selectGroup" resultType="map" >
+        SELECT ${params.column} , count(1) total FROM roominformation
+        <where> 1=1 ${ew.sqlSegment}</where>
+        group by ${params.column}
+        limit 10
+    </select>
+
+
+
+</mapper>

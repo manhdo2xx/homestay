@@ -1,0 +1,9 @@
+package com.homestay.entity.view;
+
+import com.homestay.entity.EmployeeEntity;
+
+import java.io.Serializable;
+
+public class EmployeeView extends EmployeeEntity implements Serializable {
+
+}

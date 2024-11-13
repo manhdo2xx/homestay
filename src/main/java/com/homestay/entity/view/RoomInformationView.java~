@@ -1,0 +1,9 @@
+package com.homestay.entity.view;
+
+import com.homestay.entity.RoomInformationEntity;
+
+import java.io.Serializable;
+
+public class RoomInformationView extends RoomInformationEntity implements Serializable {
+
+}

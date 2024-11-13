@@ -1,0 +1,42 @@
+package com.homestay.service.Impl;
+
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.homestay.dao.UsersDao;
+import com.homestay.entity.UsersEntity;
+import com.homestay.service.UsersService;
+import com.homestay.utils.PageUtils;
+import com.homestay.utils.Query;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
+@Service("usersService")
+public class UsersServiceImpl extends ServiceImpl<UsersDao, UsersEntity> implements UsersService {
+
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+        Page<UsersEntity> page = this.selectPage(
+                new Query<UsersEntity>(params).getPage(),
+                new EntityWrapper<UsersEntity>()
+        );
+        return new PageUtils(page);
+    }
+
+    @Override
+    public List<UsersEntity> selectListView(Wrapper<UsersEntity> wrapper) {
+        return baseMapper.selectListView(wrapper);
+    }
+
+    @Override
+    public PageUtils queryPage(Map<String, Object> params,
+                               Wrapper<UsersEntity> wrapper) {
+        Page<UsersEntity> page =new Query<UsersEntity>(params).getPage();
+        page.setRecords(baseMapper.selectListView(page,wrapper));
+        PageUtils pageUtil = new PageUtils(page);
+        return pageUtil;
+    }
+}

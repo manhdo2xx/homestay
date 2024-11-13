@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.homestay.dao.CheckoutInformationDao">
+    
+    <resultMap type="com.homestay.entity.CheckoutInformationEntity" id="checkoutinformationMap">
+        <result property="bookingNumber" column="bookingnumber"/>
+        <result property="roomNumber" column="roomnumber"/>
+        <result property="roomType" column="roomtype"/>
+        <result property="checkinDate" column="checkindate"/>
+        <result property="numberDaysStay" column="numberdaysstay"/>
+        <result property="userAccount" column="useraccount"/>
+        <result property="userName" column="username"/>
+        <result property="phoneNumber" column="phonenumber"/>
+        <result property="checkoutTime" column="checkouttime"/>
+        <result property="employeeIdNumber" column="employeeidnumber"/>
+        <result property="employeeName" column="employeename"/>
+        <result property="cleanStatus" column="cleanstatus"/>
+        <result property="isApproved" column="isapproved"/>
+        <result property="reviewResponse" column="reviewresponse"/>
+    </resultMap>
+
+    <select id="selectListView"
+            resultType="com.homestay.entity.view.CheckoutInformationView" >
+
+        SELECT  tuifangxinxi.* FROM tuifangxinxi  tuifangxinxi
+        <where> 1=1 ${ew.sqlSegment}</where>
+    </select>
+
+    <select id="selectView"
+            resultType="com.homestay.entity.view.CheckoutInformationView" >
+        SELECT * FROM tuifangxinxi  tuifangxinxi <where> 1=1 ${ew.sqlSegment}</where>
+    </select>
+
+
+</mapper>

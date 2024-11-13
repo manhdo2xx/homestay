@@ -1,0 +1,9 @@
+package com.homestay.entity.view;
+
+import com.homestay.entity.ComplaintSuggestionEntity;
+
+import java.io.Serializable;
+
+public class ComplaintSuggestionView extends ComplaintSuggestionEntity implements Serializable {
+
+}

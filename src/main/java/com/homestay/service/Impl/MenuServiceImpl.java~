@@ -1,0 +1,4 @@
+package com.homestay.service.Impl;
+
+public class MenuServiceImpl {
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.homestay.dao.RoomKeepingDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.homestay.entity.RoomKeepingEntity" id="roomkeepingMap">
+        <result property="roomNumber" column="roomnumber"/>
+        <result property="roomType" column="roomtype"/>
+        <result property="employeeIdNumber" column="employeeidnumber"/>
+        <result property="employeeName" column="employeename"/>
+        <result property="cleanupTime" column="cleanuptime"/>
+    </resultMap>
+
+    <select id="selectListView"
+            resultType="com.homestay.entity.view.RoomKeepingView" >
+
+        SELECT  roomkeeping.* FROM roomkeeping  roomkeeping
+        <where> 1=1 ${ew.sqlSegment}</where>
+    </select>
+
+    <select id="selectView"
+            resultType="com.homestay.entity.view.RoomKeepingView" >
+        SELECT * FROM roomkeeping  roomkeeping <where> 1=1 ${ew.sqlSegment}</where>
+    </select>
+
+</mapper>
